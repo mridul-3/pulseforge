@@ -31,6 +31,7 @@ scrape_configs:
   - job_name: 'custom-metrics'
     static_configs:
       - targets: ['metrics:8001']
+```
 
 🖼️ Dashboard Screenshots
 
