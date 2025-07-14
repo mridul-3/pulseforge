@@ -1,0 +1,13 @@
+global:
+  smtp_smarthost: 'smtp.sendgrid.net:587'
+  smtp_from: 'alerts@yourdomain.com'
+  smtp_auth_username: 'apikey'
+  smtp_auth_password: '${EMAIL_PASS}'
+
+route:
+  receiver: 'email-alert'
+
+receivers:
+  - name: 'email-alert'
+    email_configs:
+      - to: 'alerts@yourdomain.com'

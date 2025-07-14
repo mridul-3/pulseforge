@@ -1,0 +1,174 @@
+services:
+  # TimescaleDB
+  timescaledb:
+    image: timescale/timescaledb:latest-pg14
+    container_name: timescaledb
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5433:5432"
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+    networks:
+      - fitbit
+
+  # Ingestion
+  ingestion:
+    build: ./Task-1
+    container_name: ingestion
+    restart: always
+    depends_on:
+      - timescaledb
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      TSDB_HOST: timescaledb         
+      TSDB_PORT: "5432" 
+    volumes:
+      - ./Task-0/extracted_data:/app/extracted_data
+    networks:
+      - fitbit
+
+  # API backend
+  api:
+    build: ./Task-2
+    container_name: api
+    restart: always
+    ports:
+      - "${API_PORT}:8000"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      TSDB_HOST: timescaledb
+      TSDB_PORT: "5432"
+    depends_on:
+      - timescaledb
+    networks:
+      - fitbit
+
+  ingestion_update:
+    build: ./Task-3
+    container_name: ingestion_update
+    depends_on:
+      - timescaledb
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      TSDB_HOST: timescaledb
+      TSDB_PORT: "5432"
+    volumes:
+      - ./Task-0/extracted_data:/app/extracted_data
+    networks:
+      - fitbit
+
+  frontend:
+    build: ./Task-4/frontend
+    container_name: frontend
+    restart: always
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://api:8000
+    depends_on:
+      - api
+    networks:
+      - fitbit
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./Task-5/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./Task-5/rules.yml:/etc/prometheus/rules.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.enable-lifecycle'
+    ports:
+      - "9090:9090"
+    depends_on:
+      - api
+    networks:
+      - fitbit
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    volumes:
+      - ./Task-5/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - "9093:9093"
+    networks:
+      - fitbit
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - fitbit
+
+  # Zookeeper
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    ports:
+      - "2181:2181"
+    networks:
+      - fitbit
+
+  # Kafka
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: kafka
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    networks:
+      - fitbit
+
+  # Kafka worker
+  kafka-worker:
+    build: ./Task-6
+    container_name: kafka-worker
+    restart: always
+    depends_on:
+      - kafka
+      - timescaledb
+    environment:
+      KAFKA_BROKER: kafka:9092
+      KAFKA_TOPIC: ${KAFKA_TOPIC}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      TSDB_HOST: timescaledb
+      TSDB_PORT: "5432"
+    networks:
+      - fitbit
+
+volumes:
+  timescale_data:
+  grafana-storage:
+
+networks:
+  fitbit:
+    driver: bridge

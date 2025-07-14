@@ -1,0 +1,56 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.sqlite3
+*.egg-info/
+*.log
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ---- Node / React ----
+Task-4/frontend/node_modules/
+Task-4/frontend/.env.local
+Task-4/frontend/.next/
+Task-4/frontend/build/
+
+# ---- Environment & secrets ----
+.env
+.env.*
+
+# ---- Docker ----
+*.pid
+docker-compose.override.yml
+**/tmp/
+**/cache/
+**/.docker/
+
+# ---- VSCode & IDEs ----
+.vscode/
+.idea/
+*.swp
+
+# ---- macOS system files ----
+.DS_Store
+
+# ---- Extracted Data ----
+Task-0/extracted_data/
+*.json
+
+# ---- Logs ----
+*.log
+logs/
+nohup.out
+
+# ---- Misc ----
+*.bak
+*.tmp
+*.orig

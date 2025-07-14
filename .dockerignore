@@ -1,0 +1,44 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.log
+*.sqlite3
+*.egg-info/
+
+# Node.js / React artifacts
+node_modules/
+.next/
+build/
+.npm/
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Git
+.git/
+.gitignore
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Environment & secrets
+.env
+.env.*
+
+# Extracted data & temporary files
+Task-0/extracted_data/
+*.json
+*.tmp
+*.bak
+*.orig
+
+# Docker-compose overrides or local-only configs
+docker-compose.override.yml
