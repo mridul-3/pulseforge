@@ -48,15 +48,15 @@ docker exec -it timescaledb psql -U wearipedia_user -d wearipedia -f /hypertable
 🚀 Aggregated Ingestion Pipeline
 
 File: ingestion_update.py
-	•	Loads each metric JSON file from extracted_data/
-	•	Inserts data into raw_data
-	•	Computes aggregates in Python (pandas) and inserts into:
-	•	data_1m
-	•	data_1h
-	•	data_1d
+	• Loads each metric JSON file from extracted_data/
+	• Inserts data into raw_data
+	• Computes aggregates in Python (pandas) and inserts into:
+	• data_1m
+	• data_1h
+	• data_1d
 
 🧠 Design Decisions
-	•	Used pandas for performant grouping and mean aggregation.
-	•	Ingestion script is modular and robust against file errors.
-	•	JSON data is dynamically read and automatically routed to the correct hypertable and aggregate.
-	•	Continuous aggregates enable API to dynamically query appropriate granularity (used in Task-2).
+	• Used pandas for performant grouping and mean aggregation.
+	• Ingestion script is modular and robust against file errors.
+	• JSON data is dynamically read and automatically routed to the correct hypertable and aggregate.
+	• Continuous aggregates enable API to dynamically query appropriate granularity (used in Task-2).

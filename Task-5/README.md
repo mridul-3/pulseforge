@@ -51,12 +51,34 @@ docker-compose up -d prometheus alertmanager
 ```
 ### 2. Verify dashboards:
 
-	•	Prometheus: http://localhost:9090
-	•	Alertmanager: http://localhost:9093
+	• Prometheus: http://localhost:9090
+	• Alertmanager: http://localhost:9093
 
 
 ✅ Design Decisions
-	•	Separation of metrics server (metrics.py) ensures Prometheus can scrape independently of the main API.
-	•	SMTP credentials are loaded via .env to support secure deployment.
-	•	rules.yml is modular and can be extended with custom thresholds per metric (e.g., abnormal HRV values).
-	•	Prometheus + Alertmanager combo gives high observability at minimal infrastructure cost.
+	• Separation of metrics server (metrics.py) ensures Prometheus can scrape independently of the main API.
+	• SMTP credentials are loaded via .env to support secure deployment.
+	• rules.yml is modular and can be extended with custom thresholds per metric (e.g., abnormal HRV values).
+	• Prometheus + Alertmanager combo gives high observability at minimal infrastructure cost.
+
+📁 Directory Structure
+Task-5/
+├── Dockerfile
+├── prometheus.yml
+├── alertmanager.yml
+├── rules.yml
+└── metrics.py
+
+📌 Improvements Possible
+	• Add Grafana dashboards for richer visualization.
+	• Integrate Slack or PagerDuty for more advanced alerting.
+	• Auto-scaling alerts based on CPU/memory usage via node_exporter.
+
+⸻
+
+🧠 Summary
+
+This monitoring stack plays a crucial role in operational excellence by:
+	• Ensuring real-time visibility of ingestion performance.
+	• Alerting engineers proactively on failure.
+	• Laying groundwork for production-grade observability.

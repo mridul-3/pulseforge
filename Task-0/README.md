@@ -32,6 +32,7 @@ cd Task-0
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
 
 🛠️ How It Works
 
@@ -49,6 +50,7 @@ extract.py Overview
 	•	Summary metrics aggregated daily or nightly.
 	•	Nested structures parsed and flattened.
 	•	Output format for all metrics:
+
     ```json
     {
         "user_id": "synthetic_001",

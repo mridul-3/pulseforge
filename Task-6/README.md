@@ -61,23 +61,24 @@ KAFKA_BROKER=kafka:9092
 KAFKA_TOPIC=fitbit_ingestion
 TRINO_HOST=trino
 TRINO_PORT=8080
+```
 
 📦 Build and Launch
-	1.	Create Docker Network (if not already created):
+	1. Create Docker Network (if not already created):
 ```bash
 docker network create fitbit
 ```
 
-    2.	Start Kafka, Flink, and Trino services:
+    2. Start Kafka, Flink, and Trino services:
 ```bash
 docker-compose -f Task-6/docker-compose.kafka.yml up -d --remove-orphans
 ```
 
-    3.	Verify services:
+    3. Verify services:
 ```bash
 docker ps
 ```
-    4.	Launch the Kafka worker to consume from topic and write to TimescaleDB:
+    4. Launch the Kafka worker to consume from topic and write to TimescaleDB:
 ```bash
 docker-compose run --rm kafka-worker
 ```
@@ -86,6 +87,7 @@ You should see logs like:
 Connected to TimescaleDB
 Connected to Kafka topic: fitbit_ingestion
 Listening to Kafka topic: fitbit_ingestion...
+```
 
 🧠 Flink Logic (worker.py)
 
@@ -101,32 +103,32 @@ Task-6/
 ├── requirements.txt
 
 📈 Metrics & Monitoring
-	•	All Kafka/Flink services are connected to Prometheus (Task-5).
-	•	Custom metrics exposed via metrics.py (optional).
-	•	Alerting rules can be added for Kafka lag, Flink failure, etc.
+	• All Kafka/Flink services are connected to Prometheus (Task-5).
+	• Custom metrics exposed via metrics.py (optional).
+	• Alerting rules can be added for Kafka lag, Flink failure, etc.
 
 ⸻
 
 ✅ Design Justification
-	•	Kafka decouples ingestion from processing, allowing elastic scaling.
-	•	Flink enables low-latency enrichment and streaming joins if needed.
-	•	Trino supports federated querying across TimescaleDB, S3, and more in future.
-	•	This architecture sets the foundation for multi-user, multi-tenant scale.
+	• Kafka decouples ingestion from processing, allowing elastic scaling.
+	• Flink enables low-latency enrichment and streaming joins if needed.
+	• Trino supports federated querying across TimescaleDB, S3, and more in future.
+	• This architecture sets the foundation for multi-user, multi-tenant scale.
 
 ⸻
 
 📌 Future Enhancements
-	•	Schema registry for event contracts.
-	•	Use FlinkSQL or Kafka Connect for declarative ingestion.
-	•	Trino federation across PostgreSQL + Iceberg + Object Storage.
-	•	Kafka lag monitoring + backpressure metrics in Grafana.
+	• Schema registry for event contracts.
+	• Use FlinkSQL or Kafka Connect for declarative ingestion.
+	• Trino federation across PostgreSQL + Iceberg + Object Storage.
+	• Kafka lag monitoring + backpressure metrics in Grafana.
 
 ⸻
 
 🧠 Summary
 
 Task-6 elevates the Fitbit pipeline to production-grade scalability by:
-	•	Decoupling ingestion from DB writes.
-	•	Providing stream processing via Flink.
-	•	Enabling high-speed analytics with Trino.
-	•	Offering real-time visibility with Kafka UI.
+	• Decoupling ingestion from DB writes.
+	• Providing stream processing via Flink.
+	• Enabling high-speed analytics with Trino.
+	• Offering real-time visibility with Kafka UI.

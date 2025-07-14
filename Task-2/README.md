@@ -89,10 +89,10 @@ CORS middleware is enabled to allow requests from any frontend domain (e.g., Rea
 ⸻
 
 🧠 Design Decisions
-	•	Dynamic routing using Pydantic + FastAPI’s dependency injection model.
-	•	Time-aware logic selects optimal aggregation table to scale queries.
-	•	Clean separation of logic, environment config, and schema for maintainability.
-	•	Query results are always returned sorted by timestamp for chart rendering.
+	• Dynamic routing using Pydantic + FastAPI’s dependency injection model.
+	• Time-aware logic selects optimal aggregation table to scale queries.
+	• Clean separation of logic, environment config, and schema for maintainability.
+	• Query results are always returned sorted by timestamp for chart rendering.
 
 ⸻
 

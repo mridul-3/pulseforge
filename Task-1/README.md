@@ -40,16 +40,17 @@ Task-1/
   "timestamp": "2024-01-01T00:00:00",
   "value": 88.2
 }
+```
 
 ✅ Supported Metrics
 
 As of Task-1, we support ingesting:
-	•	heart_rate
-	•	spo2
-	•	activity
-	•	hrv
-	•	breath_rate
-	•	active_zone_minute
+	• heart_rate
+	• spo2
+	• activity
+	• hrv
+	• breath_rate
+	• active_zone_minute
 
 These are validated for uniform flat schema:
     {
@@ -78,15 +79,15 @@ docker-compose run --rm ingestion
 
 
 🔍 Design Decisions
-	•	Decoupled Schema Handling: Flat schema assumption in Task-0 ensures ingestion logic in Task-1 stays clean and minimal.
-	•	Idempotent Writes: ON CONFLICT DO NOTHING avoids duplicate inserts on reruns.
-	•	Environment-driven Config: Database creds and port are pulled from .env, making this safe for production Docker orchestration.
+	• Decoupled Schema Handling: Flat schema assumption in Task-0 ensures ingestion logic in Task-1 stays clean and minimal.
+	• Idempotent Writes: ON CONFLICT DO NOTHING avoids duplicate inserts on reruns.
+	• Environment-driven Config: Database creds and port are pulled from .env, making this safe for production Docker orchestration.
 
 🧼 Code Quality
-	•	Single-responsibility principle followed in ingest.py (modular methods: connect_db, insert_records, etc.)
-	•	Logging included for clear visibility.
-	•	Safe JSON parsing with validation.
+	• Single-responsibility principle followed in ingest.py (modular methods: connect_db, insert_records, etc.)
+	• Logging included for clear visibility.
+	• Safe JSON parsing with validation.
 
 📎 Notes
-	•	This task assumes the JSON format output from Task-0 is already normalized.
-	•	If you rerun Task-0, ensure you rerun Task-1 to reinsert updated files.
+	• This task assumes the JSON format output from Task-0 is already normalized.
+	• If you rerun Task-0, ensure you rerun Task-1 to reinsert updated files.
