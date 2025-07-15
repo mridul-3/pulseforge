@@ -16,12 +16,12 @@ This enables efficient storage, indexing, and aggregation over time at multiple 
 ---
 
 ## 📁 Directory Structure
-Task-3/
+```Task-3/
 ├── hypertables.sql          # SQL to create hypertables and aggregates
 ├── ingestion_update.py      # Python script to insert raw + rollup into aggregates
 ├── requirements.txt         # psycopg2, pandas, python-dotenv
 ├── Dockerfile               # Docker container for ingestion_update
-
+```
 ---
 
 ## 🛠️ Hypertable Setup

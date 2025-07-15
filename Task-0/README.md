@@ -16,11 +16,19 @@ Simulate realistic time-series health data for multiple metrics using **Weariped
 ---
 
 ## 📁 Directory Structure
-Task-0/
-├── extract.py             # Main script to generate and normalize synthetic data
-├── requirements.txt       # Dependencies (wearipedia, numpy, etc.)
-├── extracted_data/        # Output directory for normalized JSON files
 
+```Task-0/
+├── requirements.txt
+├── extract.py
+├── extracted_data/
+│   ├── heart_rate.json
+│   ├── spo2.json
+│   ├── hrv.json
+│   ├── breath_rate.json
+│   ├── active_zone_minute.json
+│   └── activity.json
+└── README.md
+```
 ---
 
 ## 📦 Setup

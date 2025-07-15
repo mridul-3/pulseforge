@@ -17,12 +17,12 @@ Build a lightweight **FastAPI** service to expose RESTful endpoints for accessin
 ---
 
 ## 📁 Directory Structure
-Task-2/
+```Task-2/
 ├── api/
 │   ├── main.py            # FastAPI app
 │   └── requirements.txt   # FastAPI, psycopg2, pydantic
 ├── Dockerfile             # API container
-
+```
 ---
 
 ## ⚙️ API Features

@@ -63,13 +63,13 @@ docker-compose up -d prometheus alertmanager
 	• Prometheus + Alertmanager combo gives high observability at minimal infrastructure cost.
 
 📁 Directory Structure
-Task-5/
+```Task-5/
 ├── Dockerfile
 ├── prometheus.yml
 ├── alertmanager.yml
 ├── rules.yml
 └── metrics.py
-
+```
 📌 Improvements Possible
 	• Add Grafana dashboards for richer visualization.
 	• Integrate Slack or PagerDuty for more advanced alerting.

@@ -65,14 +65,14 @@ npm run dev
 npm run build
 ```
 📂 File Structure
-Task-4/
+```Task-4/
 ├── frontend/
 │   ├── src/
 │   │   ├── App.jsx               # Main dashboard
 │   │   └── App.css               # Minimal styling
 │   ├── package.json
 │   └── Dockerfile
-
+```
 
 ✨ UI Preview
 

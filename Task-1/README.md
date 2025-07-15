@@ -17,10 +17,13 @@ Develop a containerized ingestion pipeline to load synthetic Fitbit JSON data (f
 ---
 
 ## 📁 Directory Structure
-Task-1/
-├── ingest.py
+
+```Task-1/
 ├── Dockerfile
+├── ingest.py
 ├── requirements.txt
+├── README.md
+```
 
 ---
 

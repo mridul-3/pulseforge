@@ -96,12 +96,12 @@ The worker.py connects to the Kafka topic fitbit_ingestion, reads JSON-structure
 ![alt text](image.png)
 
 📁 Directory Layout
-Task-6/
+```Task-6/
 ├── docker-compose.kafka.yml
 ├── Dockerfile
 ├── worker.py
 ├── requirements.txt
-
+```
 📈 Metrics & Monitoring
 	• All Kafka/Flink services are connected to Prometheus (Task-5).
 	• Custom metrics exposed via metrics.py (optional).
